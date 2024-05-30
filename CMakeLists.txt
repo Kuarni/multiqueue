@@ -4,11 +4,12 @@ project(multiqueue)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -Wextra -Werror -pedantic -pthread -lnuma -DPADDING=128 -DALIGNMENT=128 -DDIST_PADDING=not_padded -DQUEUE_PADDING=padded")
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread -g")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lrt")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DXEON -DR730 -DCOMPACT -DUSE_CLH_LOCKS -D_GNU_SOURCE -DADD_PADDING")
 
-set(BOOST_ROOT "~/boost/")
+#set(BOOST_ROOT "C:/Users/kotyr/.vcpkg-clion/vcpkg/installed/x64-windows/share")
+#set(benchmark_DIR "C:/Users/kotyr/.vcpkg-clion/vcpkg/installed/x64-windows/share/benchmark")
 find_package(benchmark CONFIG REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
 
