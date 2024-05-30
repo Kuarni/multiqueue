@@ -168,7 +168,7 @@ public:
     }
     void push(QueueElement * element) {
         size++;
-        if (size == elements.size()) {
+        if (size > elements.size()) {
             throw std::logic_error("my_d_ary_heap reserve size is exceeded");
         }
         set(size - 1, element);

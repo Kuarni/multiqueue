@@ -8,7 +8,7 @@ TEST(BinaryHeap, Simple) {
         vertexes[i].vertex = i;
         vertexes[i].set_dist_relaxed(dists[i]);
     }
-    BinaryHeap heap = BinaryHeap();
+    auto heap = my_d_ary_heap<2>(1000);
     ASSERT_TRUE(heap.empty());
     for (std::size_t i = 0; i < dists.size(); i++) {
         heap.push(&vertexes[i]);

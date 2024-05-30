@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.7)
+set(CMAKE_TOOLCHAIN_FILE ~/vcpkg/vcpkg/scripts/buildsystems/vcpkg.cmake)
 project(multiqueue)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -8,15 +9,16 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lrt")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DXEON -DR730 -DCOMPACT -DUSE_CLH_LOCKS -D_GNU_SOURCE -DADD_PADDING")
 
 set(BOOST_ROOT "~/boost/")
+find_package(benchmark CONFIG REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
 
 add_executable(mq src/benchmark.cpp src/dijkstra.h src/multiqueue.h src/utils.h)
-target_link_libraries(mq PRIVATE benchmark Boost::thread)
+target_link_libraries(mq PRIVATE benchmark::benchmark Boost::thread)
 target_link_directories(mq PRIVATE ~/benchmark/build/src)
 target_include_directories(mq PRIVATE ~/benchmark/include)
 
 add_executable(benchmark_example benchmark_example.cpp)
-target_link_libraries(benchmark_example PRIVATE benchmark Boost::thread)
+target_link_libraries(benchmark_example PRIVATE benchmark::benchmark Boost::thread)
 target_link_directories(benchmark_example PRIVATE ~/benchmark/build/src)
 target_include_directories(benchmark_example PRIVATE ~/benchmark/include)
 
@@ -29,5 +31,5 @@ set(TEST_SOURCES
         )
 
 add_executable(all_test ${TEST_SOURCES})
-target_link_libraries(all_test gtest gtest_main)
+target_link_libraries(all_test gtest gtest_main benchmark::benchmark Boost::thread)
 add_test(NAME all_test COMMAND all_test)

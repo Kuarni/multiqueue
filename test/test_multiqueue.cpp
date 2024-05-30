@@ -7,7 +7,7 @@ TEST(Multiqueue, Simple) {
     for (std::size_t i = 0; i < dists.size(); i++) {
         vertexes[i].vertex = i;
     }
-    Multiqueue multiqueue(1, 2, 0);
+    Multiqueue multiqueue(1, 2, 100);
     multiqueue.push(&vertexes[0], dists[0]);
     QueueElement * element;
     for (std::size_t i = 0; i < 10; i++) {

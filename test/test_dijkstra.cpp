@@ -8,8 +8,8 @@ TEST(Dijkstra, Minimized) {
     graph[0] = {{1, 1}};
     graph[1] = {{2, 2}};
 
-    QueueFactory q = [](){ return std::make_unique<MultiQueue>(1, 2, 1); };
-    DistsAndStatistics x = calc_dijkstra(graph, 1, q);
+    Timer timer;
+    DistsAndStatistics x = calc_dijkstra(graph, 1, 1, 1000, timer);
 
     DistVector expected = {0, 1, 3};
     DistVector dists = x.get_dists();
@@ -25,8 +25,8 @@ TEST(Dijkstra, Simple) {
     graph[1] = {{2, 2}};
     graph[2] = {{6, 2}, {7, 4}, {8, 5}};
 
-    QueueFactory q = [](){ return std::make_unique<MultiQueue>(1, 2, 1); };
-    DistsAndStatistics x = calc_dijkstra(graph, 1, q);
+    Timer timer;
+    DistsAndStatistics x = calc_dijkstra(graph, 1, 1, 1000, timer);
 
     DistVector expected = {0, 2, 4, 3, 5, 6, 6, 8, 9, INT_MAX};
     DistVector dists = x.get_dists();

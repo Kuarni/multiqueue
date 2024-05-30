@@ -24,6 +24,8 @@
 #ifdef __linux__
 #include <pthread.h>
 #include <sched.h>
+#include <benchmark/benchmark.h>
+
 #endif
 
 using DistVector = std::vector<DistType>;
